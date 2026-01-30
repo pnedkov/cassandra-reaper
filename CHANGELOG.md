@@ -1,5 +1,11 @@
 ## Change Log
 
+### 4.2.0 (2026/01/30 08:43 +00:00)
+- [#1644](https://github.com/thelastpickle/cassandra-reaper/pull/1644) Upgrade Logback to 1.5.25 to address CVE-2026-1225 (#1644) (@tengu-alt)
+- [#1623](https://github.com/thelastpickle/cassandra-reaper/pull/1623) Add a new unfulfilledRepairSchedule metric to track efficiently repairs complete in due time (#1623) (@adejanovski)
+- [#1630](https://github.com/thelastpickle/cassandra-reaper/pull/1630) Migrates in-memory storage backend from EclipseStore to SQLite (#1630) (@gmanojDS)
+- [#1643](https://github.com/thelastpickle/cassandra-reaper/pull/1643) Docs update for 4.2.0 (#1643) (@adejanovski)
+
 ### 4.1.1 (2026/01/20 16:50 +00:00)
 - [#1621](https://github.com/thelastpickle/cassandra-reaper/pull/1621) fix: upgrade org.jetbrains.kotlin:kotlin-stdlib from 2.2.10 to 2.2.20 (#1621) (@adejanovski)
 - [#1622](https://github.com/thelastpickle/cassandra-reaper/pull/1622) fix: upgrade com.fasterxml.jackson.datatype:jackson-datatype-joda from 2.19.0 to 2.20.0 (#1622) (@adejanovski)
