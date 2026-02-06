@@ -99,11 +99,13 @@ public final class Cluster implements Comparable<Cluster> {
   }
 
   public int getJmxPort() {
-    return properties.getJmxPort();
+    return properties != null ? properties.getJmxPort() : DEFAULT_JMX_PORT;
   }
 
   public Optional<JmxCredentials> getJmxCredentials() {
-    return Optional.ofNullable(properties.getJmxCredentials());
+    return properties != null
+        ? Optional.ofNullable(properties.getJmxCredentials())
+        : Optional.empty();
   }
 
   public State getState() {
@@ -115,7 +117,9 @@ public final class Cluster implements Comparable<Cluster> {
   }
 
   public ClusterProperties getProperties() {
-    return properties;
+    return properties != null
+        ? properties
+        : ClusterProperties.builder().withJmxPort(DEFAULT_JMX_PORT).build();
   }
 
   @Override

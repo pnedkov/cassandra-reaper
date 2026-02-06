@@ -194,11 +194,22 @@ public class CassandraClusterDao implements IClusterDao {
   }
 
   public Cluster parseCluster(Row row) throws IOException {
+    String propertiesJson = row.getString("properties");
 
-    ClusterProperties properties =
-        null != row.getString("properties")
-            ? objectMapper.readValue(row.getString("properties"), ClusterProperties.class)
-            : ClusterProperties.builder().withJmxPort(Cluster.DEFAULT_JMX_PORT).build();
+    ClusterProperties properties = null;
+    if (propertiesJson != null
+        && !propertiesJson.equals("null")
+        && !propertiesJson.trim().isEmpty()) {
+      try {
+        properties = objectMapper.readValue(propertiesJson, ClusterProperties.class);
+      } catch (Exception e) {
+        LOG.warn("Failed to deserialize cluster properties, using defaults: {}", e.getMessage());
+      }
+    }
+
+    if (properties == null) {
+      properties = ClusterProperties.builder().withJmxPort(Cluster.DEFAULT_JMX_PORT).build();
+    }
 
     Instant lastContact =
         row.getInstant("last_contact") == null ? Instant.MIN : row.getInstant("last_contact");
